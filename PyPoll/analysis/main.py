@@ -14,18 +14,18 @@ with open(csv_reader) as csvfile:
     election_data = csv.reader(csvfile, delimiter=",")
     firstrow = next(election_data,None)
 
-
     for row in election_data:
         total_votes += 1
         candidate_name = row[2]
         
         if candidate_name not in election_results:
             election_results[candidate_name] = 1
-        
+
+ #Add 1 if the name appears on the vote       
         else:
             election_results[candidate_name] += 1
 
-#Calculate Winener
+#Calculate Winner
 winner = max(election_results, key=election_results.get)
 
 print("Election Results")
@@ -40,6 +40,7 @@ print("-------------------------")
 print(f"Winner: {str(winner)}")
 print("-------------------------")
 
+#Save in a text file
 textoutput = open("vote_analysis.txt", "w")
 print("Election Results", file=textoutput)
 print("-------------------------", file=textoutput)
